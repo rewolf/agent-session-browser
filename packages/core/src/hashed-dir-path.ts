@@ -23,7 +23,7 @@ export function hashedDirToWorkspacePath(
   const solutions: string[] = [];
   function dfs(from: number, segments: string[]): void {
     if (from === tokens.length) {
-      const p = path.resolve("/" + segments.join("/"));
+      const p = path.posix.resolve("/" + segments.join("/"));
       if (existsDir(p)) {
         solutions.push(p);
       }
@@ -31,7 +31,7 @@ export function hashedDirToWorkspacePath(
     }
     for (let to = from + 1; to <= tokens.length; to++) {
       const seg = tokens.slice(from, to).join("-");
-      const partial = path.resolve("/" + [...segments, seg].join("/"));
+      const partial = path.posix.resolve("/" + [...segments, seg].join("/"));
       if (existsDir(partial)) {
         dfs(to, [...segments, seg]);
       }

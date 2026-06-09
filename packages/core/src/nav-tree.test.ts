@@ -3,6 +3,7 @@ import {
   buildNavTree,
   longestCommonPathPrefix,
 } from "./nav-tree.js";
+import { asPosixPath } from "./test-path.js";
 
 describe("longestCommonPathPrefix", () => {
   it("finds shared prefix", () => {
@@ -10,7 +11,7 @@ describe("longestCommonPathPrefix", () => {
       "/home/a/Code/Tools/fambox",
       "/home/a/Code/Tools/other",
     ]);
-    expect(p).toBe("/home/a/Code/Tools");
+    expect(asPosixPath(p)).toBe("/home/a/Code/Tools");
   });
 });
 
@@ -22,6 +23,8 @@ describe("buildNavTree", () => {
   it("single workspace", () => {
     const t = buildNavTree(["/home/foo/project"]);
     expect(t).not.toBeNull();
-    expect(t!.workspaceRootsHere).toContain("/home/foo/project");
+    expect(t!.workspaceRootsHere.map(asPosixPath)).toContain(
+      "/home/foo/project"
+    );
   });
 });

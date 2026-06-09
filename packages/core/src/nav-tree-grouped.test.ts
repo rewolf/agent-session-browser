@@ -8,6 +8,7 @@ import {
 import { ProviderRegistry } from "./provider.js";
 import type { Session, SessionSource } from "./types.js";
 import { ExternalIdFakeProvider, FlatFakeProvider } from "./test-fakes.js";
+import { asPosixPath } from "./test-path.js";
 
 function session(
   source: SessionSource,
@@ -32,10 +33,9 @@ describe("buildFlatNavTree", () => {
     const tree = buildFlatNavTree(sessions);
     expect(tree?.children).toHaveLength(2);
     expect(tree?.children.every((c) => c.children.length === 0)).toBe(true);
-    expect(tree?.children.map((c) => c.workspaceRootsHere[0]).sort()).toEqual([
-      "/flat/one",
-      "/flat/two",
-    ]);
+    expect(
+      tree?.children.map((c) => asPosixPath(c.workspaceRootsHere[0]!)).sort()
+    ).toEqual(["/flat/one", "/flat/two"]);
   });
 });
 

@@ -14,7 +14,7 @@ export function defaultCursorUserDirForPlatform(
 ): string {
   switch (platform) {
     case "darwin":
-      return path.join(
+      return path.posix.join(
         home,
         "Library",
         "Application Support",
@@ -32,9 +32,9 @@ export function defaultCursorUserDirForPlatform(
     default: {
       const xdg = env.XDG_CONFIG_HOME;
       if (xdg && xdg.length > 0) {
-        return path.join(path.resolve(xdg), "Cursor", "User");
+        return path.posix.join(path.posix.resolve(xdg), "Cursor", "User");
       }
-      return path.join(home, ".config", "Cursor", "User");
+      return path.posix.join(home, ".config", "Cursor", "User");
     }
   }
 }

@@ -41,7 +41,7 @@ describe("defaultCursorUserDirForPlatform", () => {
       HOME
     );
     expect(result.endsWith("relative/config/Cursor/User")).toBe(true);
-    expect(path.isAbsolute(result)).toBe(true);
+    expect(path.posix.isAbsolute(result)).toBe(true);
   });
 
   it("uses APPDATA/Cursor/User on win32 when APPDATA is set", () => {
