@@ -1,5 +1,7 @@
 # Agent Session Browser
 
+[![CI](https://github.com/rewolf/agent-session-browser/actions/workflows/ci.yml/badge.svg)](https://github.com/rewolf/agent-session-browser/actions/workflows/ci.yml)
+
 Browse, search, and filter AI coding agent sessions on your machine — **Cursor** and **Claude Code**, with more providers pluggable later. Local files only; nothing is sent to external services.
 
 ![Message search across agent transcripts with workspace sidebar and resume command](docs/assets/readme/message-search-resume.png)
