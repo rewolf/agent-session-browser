@@ -1,5 +1,6 @@
 import { createReadStream } from "node:fs";
 import { createInterface } from "node:readline";
+import { closeReadlineStream } from "./readline-stream.js";
 import type { ProviderRegistry, TranscriptFileRef } from "./provider.js";
 import type { SessionSource } from "./types.js";
 import { parseJsonlLine } from "./transcript-search.js";
@@ -224,7 +225,7 @@ export async function loadSessionConversation(
       }
     }
   } finally {
-    rl.close();
+    await closeReadlineStream(rl, input);
   }
 
   return {

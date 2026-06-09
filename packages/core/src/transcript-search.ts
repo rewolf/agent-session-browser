@@ -1,5 +1,6 @@
 import { createReadStream } from "node:fs";
 import { createInterface } from "node:readline";
+import { closeReadlineStream } from "./readline-stream.js";
 import { listAllTranscriptJsonlFiles } from "./transcript-jsonl-index.js";
 import type { ProviderRegistry } from "./provider.js";
 import type { SessionSource } from "./types.js";
@@ -196,7 +197,7 @@ async function scanFileForNeedle(
       });
     }
   } finally {
-    rl.close();
+    await closeReadlineStream(rl, input);
   }
 }
 

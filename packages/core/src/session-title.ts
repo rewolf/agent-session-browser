@@ -1,5 +1,6 @@
 import { createReadStream, readFileSync, statSync } from "node:fs";
 import { createInterface } from "node:readline";
+import { closeReadlineStream } from "./readline-stream.js";
 import { stripUserQueryTags } from "./user-query-text.js";
 
 const TITLE_MAX = 80;
@@ -119,7 +120,7 @@ export async function deriveSessionTitleFromJsonlAsync(
       lines.push(line);
     }
   } finally {
-    rl.close();
+    await closeReadlineStream(rl, input);
   }
   const title = titleFromLines(lines);
   if (title) {
