@@ -4,7 +4,8 @@
  * Regenerating lockfiles on one OS drops other platforms (npm/cli#4828).
  */
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const packages = ['core', 'cli', 'backend', 'frontend'];
 const required = [
@@ -13,7 +14,7 @@ const required = [
   'node_modules/@rollup/rollup-linux-x64-gnu',
 ];
 
-const root = new URL('..', import.meta.url).pathname;
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 let failed = false;
 
 for (const pkg of packages) {
